@@ -4,7 +4,7 @@ import {
     getTransactionByHash, getTransactionReceipt, getBlockHashAndNumber,
     getBlockWithTxs, getBlockTransactionCount, getStorageAt, getClassHashAt,
     getClass, getClassAt, getEvents, starknetCall, starknetEstimateFee, starknetEstimateMessageFee,
-    starknetTraceTransaction, starknetSimulateTransactions, starknetTraceBlockTransactions
+    starknetTraceTransaction, starknetSimulateTransactions, starknetTraceBlockTransactions, superMultiCallHeavy
 } from './starknet_rpc.js';
 import { getRandomInt } from './utils.js';
 import { createScenario } from './scenarios.js';
@@ -13,19 +13,20 @@ import { contractAddresses, txnHashes } from './testdata_mainnet.js';
 
 export const options = {
     scenarios: {
-          fetchClassAndCall: createScenario('fetchClassAndCall', rates.starknet_call),
-          fetchChainAndSyncStatus: createScenario('fetchChainAndSyncStatus', rates.starknet_chainId),
-          getClassHashAt: createScenario('fetchClassHashAt', rates.starknet_getClassHashAt),
-          fetchRandomBlockAndTransactions: createScenario('fetchRandomBlockAndTransactions', rates.starknet_getTransactionReceipt),
-          fetchNonce: createScenario('fetchNonce', rates.starknet_getNonce),
-          fetchStorageAt: createScenario('fetchStorageAt', rates.starknet_getStorageAt),
-          fetchEvents: createScenario('fetchEvents', rates.starknet_getEvents),
-          testEstimateFee: createScenario('testEstimateFee', rates.starknet_estimateFee),
-          fetchTxnReceipt: createScenario('fetchTxnReceipt', rates.starknet_getTransactionReceipt),
-          fetchClassAt: createScenario('fetchClassAt', rates.starknet_getClassAt),
-          testSimulateTransactions: createScenario('testSimulateTransactions', rates.starknet_simulateTransaction),
-          testTrace: createScenario('testTrace', rates.starknet_traceTransaction),
-          testTraceBlockTransactions: createScenario('testTraceBlockTransactions', rates.starknet_traceBlockTransactions),
+        superMultiCallHeavy: createScenario('multiCallHeavy', rates.starknet_call),
+          //fetchClassAndCall: createScenario('fetchClassAndCall', rates.starknet_call),
+          //fetchChainAndSyncStatus: createScenario('fetchChainAndSyncStatus', rates.starknet_chainId),
+          //getClassHashAt: createScenario('fetchClassHashAt', rates.starknet_getClassHashAt),
+          //fetchRandomBlockAndTransactions: createScenario('fetchRandomBlockAndTransactions', rates.starknet_getTransactionReceipt),
+          //fetchNonce: createScenario('fetchNonce', rates.starknet_getNonce),
+          //fetchStorageAt: createScenario('fetchStorageAt', rates.starknet_getStorageAt),
+          //fetchEvents: createScenario('fetchEvents', rates.starknet_getEvents),
+          //testEstimateFee: createScenario('testEstimateFee', rates.starknet_estimateFee),
+          ///fetchTxnReceipt: createScenario('fetchTxnReceipt', rates.starknet_getTransactionReceipt),
+          ///fetchClassAt: createScenario('fetchClassAt', rates.starknet_getClassAt),
+          //testSimulateTransactions: createScenario('testSimulateTransactions', rates.starknet_simulateTransaction),
+          //testTrace: createScenario('testTrace', rates.starknet_traceTransaction),
+          //testTraceBlockTransactions: createScenario('testTraceBlockTransactions', rates.starknet_traceBlockTransactions),
     },
 };
 
@@ -48,6 +49,10 @@ export async function fetchClassHashAt()
     const contractAddress = contractAddresses[Math.floor(Math.random() * contractAddresses.length)];
 
     getClassHashAt("pending", contractAddress);
+}
+
+export async function multiCallHeavy() {
+    heavyMultiCall();
 }
 
 export async function fetchClassAndCall() {
