@@ -4,7 +4,7 @@ import {
     getTransactionByHash, getTransactionReceipt, getBlockHashAndNumber,
     getBlockWithTxs, getBlockTransactionCount, getStorageAt, getClassHashAt,
     getClass, getClassAt, getEvents, starknetCall, starknetEstimateFee, starknetEstimateMessageFee,
-    starknetTraceTransaction, starknetSimulateTransactions, starknetTraceBlockTransactions, superMultiCallHeavy
+    starknetTraceTransaction, starknetSimulateTransactions, starknetTraceBlockTransactions, heavyMultiCall
 } from './starknet_rpc.js';
 import { getRandomInt } from './utils.js';
 import { createScenario } from './scenarios.js';
