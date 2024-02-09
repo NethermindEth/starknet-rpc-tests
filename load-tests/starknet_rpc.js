@@ -60232,8 +60232,8 @@ export function heavyMultiCall() {
         {"jsonrpc":"2.0","method":"starknet_traceBlockTransactions","params":["pending"],"id":1},
         {"jsonrpc":"2.0","method":"starknet_traceBlockTransactions","params":{"block_id": {"block_number": 53701}},"id":1}
     ]
-    
-    let response = http.post(`${NODE_URL}`, JSON.stringify(payload), { tags: { name: method } });
+
+    let response = http.post(`${NODE_URL}`, JSON.stringify(payload), { tags: { name: "super_heavy" } });
 
     checkSuccessRpcSchema(response);
 }
