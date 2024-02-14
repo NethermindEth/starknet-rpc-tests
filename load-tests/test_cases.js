@@ -179,7 +179,7 @@ export async function testTrace() {
 export async function testTraceBlockTransactions() {
     const randomBlock = await getRandomBlock();
 
-    starknetTraceBlockTransactions(randomBlock.block_hash);
+    starknetTraceBlockTransactions("pending");
 }
 
 async function getRandomBlock() {

@@ -166,11 +166,9 @@ export function starknetSimulateTransactions(transactions, blockNumber) {
     });
 }
 
-export function starknetTraceBlockTransactions(blockHash)
+export function starknetTraceBlockTransactions(block_id)
 {
     return handleRequest('starknet_traceBlockTransactions', {
-        block_id: {
-            block_hash: blockHash
-        },
+        block_id: block_id,
     });
 }
