@@ -5,7 +5,7 @@ export function createScenario(execName, target, maxVUs = 1000) {
         exec: execName,
         executor: 'ramping-arrival-rate',
         startRate: 1,
-        timeUnit: `1s`,
+        timeUnit: `5s`,
         stages: [
             { target: target, duration: duration },
         ],
