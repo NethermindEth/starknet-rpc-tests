@@ -27,10 +27,11 @@ export function checkSuccessRpcSchema(response) {
         console.error("Failed to parse response:", response.body, err);
     }
 
-    if (!isStatus200 || !isSchemaValid) {
-        console.error("Method: ", methodName);
-        console.error("Request URL: ", response.url);
-        console.error("Request Body: ", requestBody);
-        console.error("Response Body: ", JSON.stringify(response.body));
-    }
+    // if (!isStatus200 || !isSchemaValid) {
+    //     console.
+    //     console.error("Method: ", methodName);
+    //     console.error("Request URL: ", response.url);
+    //     console.error("Request Body: ", requestBody);
+    //     console.error("Response Body: ", JSON.stringify(response.body));
+    // }
 }
