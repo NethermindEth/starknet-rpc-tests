@@ -1,7 +1,6 @@
 package rpc_tests
 
 import (
-	"context"
 	"fmt"
 	"math/big"
 	"os"
@@ -11,7 +10,6 @@ import (
 	"github.com/NethermindEth/starknet.go/curve"
 	"github.com/NethermindEth/starknet.go/rpc"
 	"github.com/NethermindEth/starknet.go/utils"
-	ethrpc "github.com/ethereum/go-ethereum/rpc"
 )
 
 type TestConfig struct {
@@ -28,11 +26,11 @@ func NewTestConfigBuilder() *TestConfigBuilder {
 }
 
 func (b *TestConfigBuilder) WithProvider(t *testing.T) *TestConfigBuilder {
-	c, err := ethrpc.DialContext(context.Background(), os.Getenv("TEST_RPC_URL"))
+	var err error
+	b.config.Provider, err = rpc.NewProvider(os.Getenv("TEST_RPC_URL"))
 	if err != nil {
 		t.Fatal("Failed to get TEST_RPC_URL")
 	}
-	b.config.Provider = rpc.NewProvider(c)
 	return b
 }
 
@@ -56,7 +54,7 @@ func (b *TestConfigBuilder) WithAccount(t *testing.T) *TestConfigBuilder {
 
 	ks.Put(publicKey.String(), privKeyBigInt)
 
-	acnt, err := account.NewAccount(b.config.Provider, accountAddress, publicKey.String(), ks)
+	acnt, err := account.NewAccount(b.config.Provider, accountAddress, publicKey.String(), ks, b.config.Account.CairoVersion)
 	if err != nil {
 		t.Fatal("Failed to create new account")
 	}
